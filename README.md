@@ -22,7 +22,6 @@ composer require tasmidur/zinc-search-monolog-handler
 ## Get Started
 
 1.Modify `config/logging.php`.
-### Without Kafka SASL Config
 ```php
 return [
     'channels' => [
