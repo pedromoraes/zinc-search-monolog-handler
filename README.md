@@ -1,20 +1,17 @@
 # Kafka Monolog Handler
 
-Kafka Monolog Handler is used for storing laravel log into the Kafka message broker that's why any consumer like ELK or any other log manager can consume in an asynchronous way
+ZincSearch  Monolog Handler is used for pushing laravel log into the ZincSearch for collection and analysis
 
 ## Requirements
 
-| Dependency                                             | Requirement |
-|--------------------------------------------------------|-------------|
-| [php](https://github.com/arnaud-lb/php-rdkafka) | `>=8.0`     |
-| [Laravel](https://github.com/arnaud-lb/php-rdkafka)    | `>=8.0`     |
+## Install ZincSearch using [docker-compose.yml]()
 
-
-This package also requires the rdkafka php extension, which you can install by following [this documentation](https://github.com/edenhill/librdkafka#installation)
+or you can install by following [this documentation](https://docs.zincsearch.com/installation/)
 
 ## Install
 
-Install [kafka-monolog-handler](https://packagist.org/packages/tasmidur/kafka-monolog-handler).
+Install [zinc-search-monolog-handler](https://packagist.org/packages/tasmidur/zinc-search-monolog-handler).
+
 ```shell
 composer require tasmidur/kafka-monolog-handler
 ```
@@ -27,32 +24,23 @@ composer require tasmidur/kafka-monolog-handler
 return [
     'channels' => [
         // ...
-       'kafka' => \Tasmidur\KafkaMonologHandler\KafkaLogger::getInstance(
-            topicName: env('KAFKA_LOG_FILE_TOPIC', 'laravel_logs'),
-            brokers: env('KAFKA_LOG_BROKERS')
+        "zincSearch" => \Tasmidur\ZincSearchMonologHandler\ZincSearchLogger::getInstance(
+            indexName: env('ZINC_SEARCH_INDEX', "zinc_log"),
+            baseUrl: env('ZINC_SEARCH_BASE_URL', 'http://admin:admin123@localhost:4080/api')
         ),
     ],
 ];
 ```
-### With Kafka SASL Config and Log Formatter like ElasticsearchFormatter
+### ZincSearch with SSL_VERIFY
 ```php
 return [
     'channels' => [
         // ...
-       'kafka' => \Tasmidur\KafkaLogger\KafkaLogger::getInstance(
-            topicName: env('KAFKA_LOG_FILE_TOPIC', 'system_logs'),
-            brokers: env('KAFKA_BROKERS'),
+       "zincSearch" => \Tasmidur\ZincSearchMonologHandler\ZincSearchLogger::getInstance(
+            indexName: env('LOG_INDEX', "zinc_log"),
+            baseUrl: env('ZINC_SEARCH_BASE_URL', 'http://admin:admin123@localhost:4080/api'),
             options: [
-                'is_sasl_apply' => env('IS_SASL'), //true = applied or false= not apply
-                'sasl_config' => [
-                    'username' => env('KAFKA_BROKER_USERNAME'),
-                    'password' => env('KAFKA_BROKER_PASSWORD'),
-                    'mechanisms' => env('KAFKA_BROKER_MECHANISMS'),
-                    'security_protocol' => env('KAFKA_BROKER_SECURITY_PROTOCOL')
-                ],
-                'formatter' => new ElasticsearchFormatter(
-                    index: env('KAFKA_LOG_FILE_TOPIC', 'laravel_logs'),
-                    type: "_doc")
+                "is_ssl_verify" => true //true or false
             ]
         ),
     ],
@@ -60,14 +48,10 @@ return [
 ```
 2.Modify `.env`.
 ```
-LOG_CHANNEL=kafka
-KAFKA_BROKERS=kafka:9092,kafka:9093
-KAFKA_LOG_FILE_TOPIC=laravel-logs
+LOG_CHANNEL=zincSearch
+ZINC_SEARCH_INDEX=zinc_log
+ZINC_SEARCH_BASE_URL=url
 
-KAFKA_BROKER_USERNAME=username
-KAFKA_BROKER_PASSWORD=password
-KAFKA_BROKER_MECHANISMS=SCRAM-SHA-512
-KAFKA_BROKER_SECURITY_PROTOCOL=SASL_SSL
 ```
 
 ## License

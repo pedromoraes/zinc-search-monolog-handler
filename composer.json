@@ -1,15 +1,15 @@
 {
     "name": "tasmidur/zinc-search-monolog-handler",
-    "description": "Kafka Monolog Handler is used for pushing laravel log into the Kafka message broker",
+    "description": "ZincSearch  Monolog Handler is used for pushing laravel log into the ZincSearch for collection and analysis",
     "keywords": [
-        "kafka",
         "logger",
         "laravel",
         "lumen",
         "laravel log",
-        "message broker",
-        "kafka broker",
-        "broker"
+        "monolog handler",
+        "zincSearch  monolog handler",
+        "laravel zincSearch  monolog handler",
+        "lumen zincSearch  monolog handler"
     ],
     "homepage": "https://github.com/tasmidur/zinc-search-monolog-handler",
     "minimum-stability": "dev",
