@@ -4,7 +4,7 @@ ZincSearch  Monolog Handler is used for pushing laravel log into the ZincSearch 
 
 ## Requirements
 
-## Install ZincSearch using [docker-compose.yml]()
+## Install ZincSearch using [docker-compose.yml](https://github.com/tasmidur/zinc-search-monolog-handler/blob/master/docker-compose.yml)
 
 or you can install by following [this documentation](https://docs.zincsearch.com/installation/)
 
