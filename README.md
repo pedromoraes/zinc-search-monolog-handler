@@ -1,6 +1,11 @@
-# Kafka Monolog Handler
+# Zinc Search Monolog Handler
 
-ZincSearch  Monolog Handler is used for pushing laravel log into the ZincSearch for collection and analysis
+
+ZincSearch  Monolog Handler is used for pushing laravel log into the ZincSearch for collection and analysis.Zinc is a search engine that does full text indexing. It is a lightweight alternative to Elasticsearch and runs using a fraction of the resources. It uses bluge as the underlying indexing library.
+
+It is very simple and easy to operate as opposed to Elasticsearch which requires a couple dozen knobs to understand and tune which you can get up and running in 2 minutes
+
+It is a drop-in replacement for Elasticsearch if you are just ingesting data using APIs and searching using kibana (Kibana is not supported with zinc. Zinc provides its own UI).
 
 ## Requirements
 
@@ -53,7 +58,8 @@ ZINC_SEARCH_INDEX=zinc_log
 ZINC_SEARCH_BASE_URL=url
 
 ```
-
+## The system Log view in ZincSearch
+![ZincSearch](https://github.com/tasmidur/zinc-search-monolog-handler/blob/master/zinc-search-dashboard.png)
 ## License
 
 [MIT](LICENSE)
