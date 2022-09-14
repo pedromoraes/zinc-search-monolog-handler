@@ -16,7 +16,7 @@ or you can install by following [this documentation](https://docs.zincsearch.com
 Install [zinc-search-monolog-handler](https://packagist.org/packages/tasmidur/zinc-search-monolog-handler).
 
 ```shell
-composer require tasmidur/kafka-monolog-handler
+composer require tasmidur/zinc-search-monolog-handler
 ```
 
 ## Get Started
