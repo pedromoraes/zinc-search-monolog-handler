@@ -1,12 +1,10 @@
 # Zinc Search Monolog Handler
 
 
-ZincSearch  Monolog Handler is used for pushing laravel log into the ZincSearch for collection and analysis.Zinc is a search engine that does full text indexing. It is a lightweight alternative to Elasticsearch and runs using a fraction of the resources. It uses bluge as the underlying indexing library.
+Searching for logs for your applications can be tedious and challenging. ZincSearch solves the problem very elegantly. You can use standard log forwarders like fluentd, fluent-bit, vector, syslog-ng or others to forward logs to ZincSearch. ZincSearch can then store the indexed logs in S3 or on disk and provide fast search for your logs.
+## ZincSearch  Monolog Handler is used for pushing laravel log into the ZincSearch for collection and analysis.
 
-It is very simple and easy to operate as opposed to Elasticsearch which requires a couple dozen knobs to understand and tune which you can get up and running in 2 minutes
-
-It is a drop-in replacement for Elasticsearch if you are just ingesting data using APIs and searching using kibana (Kibana is not supported with zinc. Zinc provides its own UI).
-
+Log forwarders can read the log files incrementally as new logs appear in them and can then forward them in batches in order to be more efficient in sending them
 ## Requirements
 
 ## Install ZincSearch using [docker-compose.yml](https://github.com/tasmidur/zinc-search-monolog-handler/blob/master/docker-compose.yml)
