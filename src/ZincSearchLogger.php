@@ -6,7 +6,6 @@ use Monolog\Logger;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Throwable;
 
-
 class ZincSearchLogger
 {
     /**
@@ -16,14 +15,21 @@ class ZincSearchLogger
      * @param array $options
      * @return array
      */
-    public static function getInstance(string $indexName, string $baseUrl, array $options = []): array
-    {
+    public static function getInstance(
+        string $indexName,
+        string $baseUrl,
+        string $username,
+        string $password,
+        array $options = [],
+    ): array {
         $default = [
             'driver' => 'custom',
             'via' => static::class,
             'index' => $indexName,
             'base_url' => $baseUrl,
-            'fallback' => 'daily'
+            'username' => $username,
+            'password' => $password,
+            'fallback' => 'stdout'
         ];
         return array_merge($default, $options);
     }
@@ -34,10 +40,22 @@ class ZincSearchLogger
     public function __invoke(array $config): Logger
     {
         $logger = new Logger('zincSearch');
-        throw_if(empty($config['base_url']), new \Exception('Provided baseUrl is invalid', ResponseAlias::HTTP_UNPROCESSABLE_ENTITY));
+
+        throw_if(
+            empty($config['base_url']),
+            new \Exception('Provided baseUrl is invalid', ResponseAlias::HTTP_UNPROCESSABLE_ENTITY)
+        );
         $indexName = $config['index'];
         $baseUrl = $config['base_url'];
-        $handler = new ZincSearchLogHandler(index: $indexName, baseUrl: $baseUrl, config: $config);
+        $username = $config['username'];
+        $password = $config['password'];
+        $handler = new ZincSearchLogHandler(
+            index: $indexName,
+            baseUrl: $baseUrl,
+            config: $config,
+            username: $username,
+            password: $password
+        );
         $logger->pushHandler($handler);
         return $logger;
     }
